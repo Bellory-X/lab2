@@ -28,6 +28,5 @@ public class PlusCommand extends AbstractCommand {
 
         String result = String.valueOf(number1 + number2);
         context.push(result);
-
     }
 }

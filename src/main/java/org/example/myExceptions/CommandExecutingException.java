@@ -1,6 +1,6 @@
 package org.example.myExceptions;
 
-public class CommandExecutingException extends RuntimeException{
+public class CommandExecutingException extends RuntimeException {
 
     public CommandExecutingException(String message) {
         super(message);

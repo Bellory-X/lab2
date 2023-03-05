@@ -18,7 +18,7 @@ public class DivideCommand extends AbstractCommand {
     @Override
     public void doOperation() {
         if (arguments != null)
-            throw new ArgsAmountException("in DivideCommand: " + context.toString());
+            throw new ArgsAmountException("DIVIDE: should not be arguments");
 
         String a1 = context.pop();
         String a2 = context.pop();
@@ -31,6 +31,5 @@ public class DivideCommand extends AbstractCommand {
 
         String result = String.valueOf(number1 / number2);
         context.push(result);
-
     }
 }

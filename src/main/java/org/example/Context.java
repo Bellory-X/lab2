@@ -48,6 +48,4 @@ public class Context {
     public boolean stackIsEmpty () {
         return stack.size() == 0;
     }
-
-
 }

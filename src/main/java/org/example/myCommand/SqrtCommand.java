@@ -31,12 +31,4 @@ public class SqrtCommand extends AbstractCommand {
         String result = String.valueOf(number1);
         context.push(result);
     }
-
-    @Override
-    public String toString() {
-        return "SqrtCommand{" +
-                "context=" + context +
-                ", arguments=" + arguments +
-                '}';
-    }
 }

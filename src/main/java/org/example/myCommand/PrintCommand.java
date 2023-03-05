@@ -17,12 +17,4 @@ public class PrintCommand extends AbstractCommand {
     public void doOperation() {
         System.out.println(context.peekTop());
     }
-
-    @Override
-    public String toString() {
-        return "PrintCommand{" +
-                "context=" + context +
-                ", arguments=" + arguments +
-                '}';
-    }
 }

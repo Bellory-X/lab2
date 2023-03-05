@@ -20,14 +20,6 @@ public abstract class AbstractCommand {
 
     public abstract void doOperation();
 
-    @Override
-    public String toString() {
-        return "AbstractCommand{" +
-                "context=" + context +
-                ", arguments=" + arguments +
-                '}';
-    }
-
     protected double checkNumberOrVariable(String variable) {
         boolean numeric;
         numeric = variable.matches("-?\\d+(\\.\\d+)?");

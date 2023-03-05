@@ -18,18 +18,10 @@ public class PushCommand extends AbstractCommand {
     public void doOperation() {
 
         if (arguments.size() != 1)
-            throw new ArgsAmountException("bad number of args in PushCommand"); //Заменить на свою ошибку
+            throw new ArgsAmountException("bad number of args in PushCommand");
 
         String a1 = arguments.get(0);
 
         context.push(a1);
-    }
-
-    @Override
-    public String toString() {
-        return "PushCommand{" +
-                "context=" + context +
-                ", arguments=" + arguments +
-                '}';
     }
 }

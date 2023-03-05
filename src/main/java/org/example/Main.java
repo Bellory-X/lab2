@@ -11,20 +11,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class.getName());
 
-    public static List<String> getText(Scanner in) {
+    public static List<Data> getDataList(Scanner in) {
 
         logger.info("getting text from file reader");
 
-        List<String> list = new ArrayList<>();
+        List<Data> list = new ArrayList<>();
 
         while (in.hasNextLine()) {
-            String data = in.nextLine();
-            list.add(data);
+            String str = in.nextLine();
+            list.add(new Data(str));
         }
 
         return list;
@@ -35,9 +34,7 @@ public class Main {
         try (Scanner in = args.length > 0 ? new Scanner(new File(args[0])) : new Scanner(System.in);
              FileWriter out = args.length > 1 ? new FileWriter(args[1]) : null)
         {
-            List<String> listOfInput = getText(in);
-
-            List<Data> dataArrayList = listOfInput.stream().map(Data::new).collect(Collectors.toList());
+            List<Data> dataArrayList = getDataList(in);
 
             Executor executor = new Executor(dataArrayList);
 
@@ -47,9 +44,8 @@ public class Main {
             else
                 out.write(result);
         }
-        catch (ExecutorException | CommandExecutingException | IOException exception) {
-            logger.error(exception);
+        catch (ExecutorException | CommandExecutingException | IOException e) {
+            logger.error(e);
         }
     }
-
 }

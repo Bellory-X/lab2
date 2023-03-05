@@ -16,9 +16,9 @@ public class DefineCommand extends AbstractCommand {
     }
 
     @Override
-    public void doOperation()  {
+    public void doOperation() {
         if (arguments.size() != 2)
-            throw new ArgsAmountException("pop");
+            throw new ArgsAmountException("DEFINE: not enough arguments");
 
         String str = arguments.get(0);
         double value;
@@ -26,16 +26,8 @@ public class DefineCommand extends AbstractCommand {
         if (Character.isLetter(str.charAt(0)))
             value = checkNumberOrVariable(arguments.get(1));
         else
-            throw new CommandExecutingException("incorrect name of defining variable" + context.toString());
+            throw new CommandExecutingException("incorrect name of defining variable");
 
         context.setDefine(str, value);
-    }
-
-    @Override
-    public String toString() {
-        return "DefineCommand{" +
-                "context=" + context +
-                ", arguments=" + arguments +
-                '}';
     }
 }

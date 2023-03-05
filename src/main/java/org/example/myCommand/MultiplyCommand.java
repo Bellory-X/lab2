@@ -28,6 +28,7 @@ public class MultiplyCommand extends AbstractCommand {
         double number2 = checkNumberOrVariable(a2);
 
         String result = String.valueOf(number1 * number2);
+
         context.push(result);
     }
 }

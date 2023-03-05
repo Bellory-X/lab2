@@ -33,12 +33,10 @@ public class Data {
     }
 
     private String getOperationNameFromString(String str) {
-        //возможно потом поменять регулярку на более общий разделитьель
-        String[] strSplit = str.split(" ");
+        String[] strSplit = str.split("[^a-zA-Z0-9_.+*#/-]+");
         List<String> arguments = new ArrayList<>(Arrays.asList(strSplit));
 
         return switch (arguments.get(0)) {
-            case "" -> CommentCommand.class.getName();          //empty strings will be like comments
             case "#" -> CommentCommand.class.getName();
             case "/" -> DivideCommand.class.getName();
             case "*" -> MultiplyCommand.class.getName();
@@ -59,13 +57,5 @@ public class Data {
 
     public List<String> getArguments(){
         return arguments;
-    }
-
-    @Override
-    public String toString() {
-        return "Data{" +
-                "typeOfOperation='" + operation + '\'' +
-                ", arguments=" + arguments +
-                '}';
     }
 }

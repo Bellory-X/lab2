@@ -25,8 +25,8 @@ public class Executor {
         AbstractCommand command;
 
         try {
-            Class<?> clazz = Class.forName(data.getCommandClassName());
-            command = (AbstractCommand) clazz.getDeclaredConstructor(Context.class, List.class)
+            command = (AbstractCommand) Class.forName(data.getCommandClassName())
+                    .getDeclaredConstructor(Context.class, List.class)
                     .newInstance(context, data.getArguments());
         }
         catch (NullPointerException | ClassNotFoundException | InstantiationException |
@@ -52,7 +52,6 @@ public class Executor {
                 e.printStackTrace();
                 throw new ExecutorException("error while executing command");
             }
-
         });
 
         logger.info("stop executing calculator and writing result");
