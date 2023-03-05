@@ -34,9 +34,9 @@ public class Main {
         try (Scanner in = args.length > 0 ? new Scanner(new File(args[0])) : new Scanner(System.in);
              FileWriter out = args.length > 1 ? new FileWriter(args[1]) : null)
         {
-            List<Data> dataArrayList = getDataList(in);
+            List<Data> dataList = getDataList(in);
 
-            Executor executor = new Executor(dataArrayList);
+            Executor executor = new Executor(dataList);
 
             String result = executor.executeCalculator();
             if (out == null)
