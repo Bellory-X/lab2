@@ -15,5 +15,7 @@ public class CommentCommand extends AbstractCommand {
     }
 
     @Override
-    public void doOperation() {}
+    public void doOperation() {
+        logger.info("do operation #");
+    }
 }

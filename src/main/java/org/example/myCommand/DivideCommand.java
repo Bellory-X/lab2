@@ -17,6 +17,8 @@ public class DivideCommand extends AbstractCommand {
 
     @Override
     public void doOperation() {
+        logger.info("do operation /");
+
         if (arguments != null)
             throw new ArgsAmountException("DIVIDE: should not be arguments");
 

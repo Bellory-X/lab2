@@ -17,6 +17,7 @@ public class MultiplyCommand extends AbstractCommand {
 
     @Override
     public void doOperation() {
+        logger.info("do operation *");
 
         if (arguments != null)
             throw new ArgsAmountException("bad number of arguments in MultiplyCommand:" + context.toString());

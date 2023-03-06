@@ -2,8 +2,6 @@ package org.example;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.example.myExceptions.CommandExecutingException;
-import org.example.myExceptions.ExecutorException;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -44,8 +42,9 @@ public class Main {
             else
                 out.write(result);
         }
-        catch (ExecutorException | CommandExecutingException | IOException e) {
-            logger.error(e);
+        catch (RuntimeException | IOException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 }

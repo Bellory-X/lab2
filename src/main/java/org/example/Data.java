@@ -1,5 +1,7 @@
 package org.example;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.example.myCommand.*;
 import org.example.myExceptions.CommandExecutingException;
 
@@ -14,6 +16,7 @@ import java.util.List;
 public class Data {
     private final String operation;
     private final List<String> arguments;
+    private static final Logger logger = LogManager.getLogger(Data.class.getName());
 
     public Data(String str) {
         arguments = convertStringToList(str);
@@ -47,7 +50,10 @@ public class Data {
             case "SQRT" -> SqrtCommand.class.getName();
             case "PRINT" -> PrintCommand.class.getName();
             case "DEFINE" -> DefineCommand.class.getName();
-            default -> throw new CommandExecutingException("wrong operation type in Data constructor");
+            default -> {
+                logger.error("Not found command: " + arguments.get(0));
+                throw new CommandExecutingException("wrong operation type in Data constructor");
+            }
         };
     }
 

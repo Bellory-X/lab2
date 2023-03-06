@@ -49,8 +49,9 @@ public class Executor {
                 command.doOperation();
             }
             catch (RuntimeException e) {
-                e.printStackTrace();
-                throw new ExecutorException("error while executing command");
+                logger.error(e.getMessage());
+//                e.printStackTrace();
+//                throw new ExecutorException("error while executing command");
             }
         });
 

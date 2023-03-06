@@ -16,6 +16,7 @@ public class SubCommand extends AbstractCommand {
 
     @Override
     public void doOperation() {
+        logger.info("do operation -");
 
         if (arguments != null)
             throw new ArgsAmountException("bad number of args in SubCommand: " + context.toString());

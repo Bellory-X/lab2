@@ -17,6 +17,8 @@ public class SqrtCommand extends AbstractCommand {
 
     @Override
     public void doOperation() {
+        logger.info("do operation SQRT");
+
         if (arguments != null)
             throw new ArgsAmountException("bad number of args in SqrtCommand: " + context.toString());
 

@@ -15,6 +15,8 @@ public class PrintCommand extends AbstractCommand {
 
     @Override
     public void doOperation() {
+        logger.info("do operation PRINT");
+
         System.out.println(context.peekTop());
     }
 }

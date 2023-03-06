@@ -17,6 +17,8 @@ public class DefineCommand extends AbstractCommand {
 
     @Override
     public void doOperation() {
+        logger.info("do operation DEFINE");
+
         if (arguments.size() != 2)
             throw new ArgsAmountException("DEFINE: not enough arguments");
 

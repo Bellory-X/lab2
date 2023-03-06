@@ -1,6 +1,8 @@
 package org.example.myCommand;
 
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.example.Context;
 
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
 public abstract class AbstractCommand {
     protected Context context;
     protected List<String> arguments;
+    protected static final Logger logger = LogManager.getLogger(AbstractCommand.class.getName());
 
     public AbstractCommand(Context context, List<String> arguments) {
         this.context = context;

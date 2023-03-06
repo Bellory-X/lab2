@@ -16,6 +16,7 @@ public class PopCommand extends AbstractCommand {
 
     @Override
     public void doOperation() {
+        logger.info("do operation POP");
 
         if (arguments != null)
             throw new ArgsAmountException("bad number of arguments in PopCommand");

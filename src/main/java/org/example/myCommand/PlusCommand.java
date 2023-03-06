@@ -16,6 +16,7 @@ public class PlusCommand extends AbstractCommand {
 
     @Override
     public void doOperation() {
+        logger.info("do operation +");
 
         if (arguments !=  null)
             throw new ArgsAmountException("bad number of arguments in PlusCommant" + context.toString());

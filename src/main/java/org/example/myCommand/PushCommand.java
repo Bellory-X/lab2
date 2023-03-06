@@ -16,6 +16,7 @@ public class PushCommand extends AbstractCommand {
 
     @Override
     public void doOperation() {
+        logger.info("do operation PUSH");
 
         if (arguments.size() != 1)
             throw new ArgsAmountException("bad number of args in PushCommand");
