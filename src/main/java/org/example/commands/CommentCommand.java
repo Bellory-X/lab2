@@ -1,4 +1,4 @@
-package org.example.myCommand;
+package org.example.commands;
 
 import org.example.Context;
 
@@ -16,6 +16,6 @@ public class CommentCommand extends AbstractCommand {
 
     @Override
     public void doOperation() {
-        logger.info("do operation #");
+        logger.info("do operation #: " + String.join(" ", arguments));
     }
 }

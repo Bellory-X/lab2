@@ -1,10 +1,11 @@
-package org.example.myCommand;
+package org.example.commands;
 
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.example.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,16 +19,13 @@ public abstract class AbstractCommand {
 
     public AbstractCommand(Context context, List<String> arguments) {
         this.context = context;
-        this.arguments = arguments;
+        this.arguments = arguments == null ? new ArrayList<>() : arguments;
     }
 
     public abstract void doOperation();
 
     protected double checkNumberOrVariable(String variable) {
-        boolean numeric;
-        numeric = variable.matches("-?\\d+(\\.\\d+)?");
-
-        if(numeric)
+        if(variable.matches("-?\\d+(\\.\\d+)?"))
             return Double.parseDouble(variable);
 
         return context.getDefine(variable);

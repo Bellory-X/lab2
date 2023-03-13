@@ -2,44 +2,35 @@ package org.example;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.example.myCommand.*;
-import org.example.myExceptions.CommandExecutingException;
+import org.example.commands.*;
+import org.example.exceptions.CommandExecutingException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 
 /**
  * Преобразует строку со входа в данные, с которыми может работать калькулятор
  */
 public class Data {
+    private static final Logger logger = LogManager.getLogger(Data.class.getName());
     private final String operation;
     private final List<String> arguments;
-    private static final Logger logger = LogManager.getLogger(Data.class.getName());
 
-    public Data(String str) {
-        arguments = convertStringToList(str);
-        operation = getOperationNameFromString(str);
+    public Data(String operation, List<String> arguments) {
+        this.operation = getOperationNameFromString(operation);
+        this.arguments = arguments == null ? new ArrayList<>() : arguments;
     }
 
-    private List<String> convertStringToList(String str) {
-        String[] strSplit = str.split("[^a-zA-Z0-9_.]+");
-        List<String> arguments = new ArrayList<>(Arrays.asList(strSplit));
+    public String operation() {
+        return operation;
+    }
 
-        if (arguments.size() <= 1)
-            return null;
-
-        arguments.remove(0);
-
+    public List<String> arguments() {
         return arguments;
     }
 
-    private String getOperationNameFromString(String str) {
-        String[] strSplit = str.split("[^a-zA-Z0-9_.+*#/-]+");
-        List<String> arguments = new ArrayList<>(Arrays.asList(strSplit));
-
-        return switch (arguments.get(0)) {
+    private String getOperationNameFromString(String operation) {
+        return switch (operation) {
             case "#" -> CommentCommand.class.getName();
             case "/" -> DivideCommand.class.getName();
             case "*" -> MultiplyCommand.class.getName();
@@ -55,13 +46,5 @@ public class Data {
                 throw new CommandExecutingException("wrong operation type in Data constructor");
             }
         };
-    }
-
-    public String getCommandClassName() {
-        return operation;
-    }
-
-    public List<String> getArguments(){
-        return arguments;
     }
 }

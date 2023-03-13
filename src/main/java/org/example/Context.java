@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.myExceptions.ContextException;
+import org.example.exceptions.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,10 +24,10 @@ public class Context {
     }
 
     public String peekTop() {
-        if (!stack.isEmpty())
-            return stack.get(stack.size() - 1);
+        if (stack.isEmpty())
+            throw new ContextException("trying to get element from empty stack");
 
-        throw new ContextException("trying to get element from empty stack");
+        return stack.get(stack.size() - 1);
     }
 
     public void push(String element) {
@@ -45,7 +45,11 @@ public class Context {
         return defines.get(key);
     }
 
-    public boolean stackIsEmpty () {
-        return stack.size() == 0;
+    public int sizeStack() {
+        return stack.size();
+    }
+
+    public int sizeDefines() {
+        return defines.size();
     }
 }

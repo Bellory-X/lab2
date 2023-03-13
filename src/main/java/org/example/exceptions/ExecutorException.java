@@ -1,4 +1,4 @@
-package org.example.myExceptions;
+package org.example.exceptions;
 
 public class ExecutorException extends RuntimeException{
 

@@ -1,8 +1,7 @@
-package org.example.myCommand;
+package org.example.commands;
 
 import org.example.Context;
-import org.example.myExceptions.ArgsAmountException;
-import org.example.myExceptions.CommandExecutingException;
+import org.example.exceptions.*;
 
 import java.util.List;
 
@@ -17,19 +16,15 @@ public class DefineCommand extends AbstractCommand {
 
     @Override
     public void doOperation() {
-        logger.info("do operation DEFINE");
+        logger.info("do operation DEFINE " + String.join(" ", arguments));
 
         if (arguments.size() != 2)
-            throw new ArgsAmountException("DEFINE: not enough arguments");
+            throw new ArgsAmountException("DEFINE: wrong number of arguments");
 
         String str = arguments.get(0);
-        double value;
-
         if (Character.isLetter(str.charAt(0)))
-            value = checkNumberOrVariable(arguments.get(1));
+            context.setDefine(str, checkNumberOrVariable(arguments.get(1)));
         else
             throw new CommandExecutingException("incorrect name of defining variable");
-
-        context.setDefine(str, value);
     }
 }

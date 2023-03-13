@@ -1,7 +1,7 @@
-package org.example.myCommand;
+package org.example.commands;
 
 import org.example.Context;
-import org.example.myExceptions.ArgsAmountException;
+import org.example.exceptions.*;
 
 import java.util.List;
 
@@ -16,13 +16,11 @@ public class PushCommand extends AbstractCommand {
 
     @Override
     public void doOperation() {
-        logger.info("do operation PUSH");
+        logger.info("do operation PUSH " + String.join(" ", arguments));
 
         if (arguments.size() != 1)
-            throw new ArgsAmountException("bad number of args in PushCommand");
+            throw new ArgsAmountException("PUSH: wrong number of arguments");
 
-        String a1 = arguments.get(0);
-
-        context.push(a1);
+        context.push(arguments.get(0));
     }
 }

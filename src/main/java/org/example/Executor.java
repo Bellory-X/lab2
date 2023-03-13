@@ -3,14 +3,14 @@ package org.example;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.example.myCommand.AbstractCommand;
-import org.example.myExceptions.ExecutorException;
+import org.example.commands.AbstractCommand;
+import org.example.exceptions.ExecutorException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
- * Класс исполнения команд для калькулятора
+ * Класс исполнения команд калькулятора
  */
 public class Executor {
     private final Context context = new Context();
@@ -21,37 +21,28 @@ public class Executor {
         this.dataList = dataList;
     }
 
-    private AbstractCommand fabricMethod(Data data) {
-        AbstractCommand command;
-
+    private AbstractCommand getCommand(Data data) {
         try {
-            command = (AbstractCommand) Class.forName(data.getCommandClassName())
+            return (AbstractCommand) Class.forName(data.operation())
                     .getDeclaredConstructor(Context.class, List.class)
-                    .newInstance(context, data.getArguments());
+                    .newInstance(context, data.arguments());
         }
         catch (NullPointerException | ClassNotFoundException | InstantiationException |
                NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
             throw new ExecutorException("one of the command is not defined");
         }
-
-        return command;
     }
 
     public String executeCalculator () {
-
         logger.info("starting executing calculator");
 
         dataList.forEach(data -> {
-            AbstractCommand command = fabricMethod(data);
-
             try {
-                command.doOperation();
+                getCommand(data).doOperation();
             }
             catch (RuntimeException e) {
                 logger.error(e.getMessage());
-//                e.printStackTrace();
-//                throw new ExecutorException("error while executing command");
             }
         });
 
@@ -59,8 +50,4 @@ public class Executor {
 
         return context.peekTop();
     }
-
-
-
-
 }

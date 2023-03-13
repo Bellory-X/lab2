@@ -1,8 +1,7 @@
-package org.example.myCommand;
+package org.example.commands;
 
 import org.example.Context;
-import org.example.myExceptions.ArgsAmountException;
-import org.example.myExceptions.CommandExecutingException;
+import org.example.exceptions.*;
 
 import java.util.List;
 
@@ -19,19 +18,17 @@ public class DivideCommand extends AbstractCommand {
     public void doOperation() {
         logger.info("do operation /");
 
-        if (arguments != null)
-            throw new ArgsAmountException("DIVIDE: should not be arguments");
+        if (!arguments.isEmpty())
+            throw new ArgsAmountException("/: should not be arguments");
 
-        String a1 = context.pop();
-        String a2 = context.pop();
-
-        double number1 = checkNumberOrVariable(a1);
-        double number2 = checkNumberOrVariable(a2);
+        var number1 = checkNumberOrVariable(context.pop());
+        var number2 = checkNumberOrVariable(context.pop());
 
         if (number2 == 0.0)
             throw new CommandExecutingException("division by zero");
 
-        String result = String.valueOf(number1 / number2);
-        context.push(result);
+        logger.info("result operation /: " + (number1 / number2));
+
+        context.push(String.valueOf(number1 / number2));
     }
 }

@@ -1,7 +1,7 @@
-package org.example.myCommand;
+package org.example.commands;
 
 import org.example.Context;
-import org.example.myExceptions.ArgsAmountException;
+import org.example.exceptions.*;
 
 import java.util.List;
 
@@ -18,8 +18,8 @@ public class PopCommand extends AbstractCommand {
     public void doOperation() {
         logger.info("do operation POP");
 
-        if (arguments != null)
-            throw new ArgsAmountException("bad number of arguments in PopCommand");
+        if (!arguments.isEmpty())
+            throw new ArgsAmountException("POP: should not be arguments");
 
         context.pop();
     }
